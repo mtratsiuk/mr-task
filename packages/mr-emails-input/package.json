@@ -1,0 +1,21 @@
+{
+    "name": "@mr/emails-input",
+    "private": true,
+    "version": "1.0.0",
+    "description": "Emails input component",
+    "source": "index.ts",
+    "main": "dist/emails-input.js",
+    "exports": "./dist/emails-input.modern.js",
+    "module": "dist/emails-input.module.js",
+    "unpkg": "dist/emails-input.umd.js",
+    "scripts": {
+      "build": "microbundle --name=mrEmailsInput",
+      "start": "microbundle --name=mrEmailsInput watch",
+      "prepublish": "npm run build"
+    },
+    "author": "Mihail Tratsiuk",
+    "license": "MIT",
+    "devDependencies": {
+        "microbundle": "^0.13.0"
+    }
+}
