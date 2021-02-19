@@ -1,11 +1,11 @@
 let rules = ""
 let isLoaded = false
 
-export type Css = (value: string) => void
-export const css: Css = (value) => (rules += value)
+export function css(value: string): void {
+    rules += value
+}
 
-export type LoadStyles = () => void
-export const loadStyles: LoadStyles = () => {
+export function loadStyles(): void {
     if (isLoaded) {
         return
     }

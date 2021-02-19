@@ -22,6 +22,10 @@ export abstract class Component<T extends Element = Element> implements ICompone
 
     render(node: Element): void {
         node.innerHTML = this.view()
+            .split("\n")
+            .map((x) => x.trim())
+            .join("")
+
         this.mount()
     }
 
