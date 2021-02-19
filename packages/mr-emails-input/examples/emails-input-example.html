@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -7,12 +8,56 @@
 
   <script src="../dist/emails-input.umd.js"></script>
 
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    html *,
+    html *::before,
+    html *::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #root-app-1 {
+      width: 50%;
+      height: 420px;
+      margin: 40px;
+    }
+
+    #root-app-2 {
+      width: 25%;
+      height: 200px;
+      margin: 40px;
+    }
+
+  </style>
+
 </head>
+
 <body>
-  <div id="root"></div>
+
+
+  <div id="root-app-1"></div>
+
+
+  <div id="root-app-2"></div>
 
   <script>
-    mrEmailsInput.render(document.querySelector("#root"))
+    mrEmailsInput.render(document.querySelector("#root-app-1"))
+    mrEmailsInput.render(document.querySelector("#root-app-2"))
   </script>
 </body>
+
 </html>

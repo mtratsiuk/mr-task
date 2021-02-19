@@ -1,3 +1,5 @@
-export function render(node: HTMLElement): void {
-    node.innerHTML = "hello emails input"
+import { EmailsInputApi } from "./src/emails-input-api"
+
+export function render(node: HTMLElement): EmailsInputApi {
+    return new EmailsInputApi(node)
 }

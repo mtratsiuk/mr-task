@@ -9,8 +9,8 @@
     "module": "dist/emails-input.module.js",
     "unpkg": "dist/emails-input.umd.js",
     "scripts": {
-      "build": "microbundle --name=mrEmailsInput",
-      "start": "microbundle --name=mrEmailsInput watch",
+      "build": "microbundle --name=mrEmailsInput --no-compress",
+      "start": "microbundle --name=mrEmailsInput --no-compress watch",
       "prepublish": "npm run build"
     },
     "author": "Mihail Tratsiuk",
