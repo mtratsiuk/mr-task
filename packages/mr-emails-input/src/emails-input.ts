@@ -3,25 +3,29 @@ import { css } from "./styles"
 import { colors } from "./theme"
 
 import { EmailLabel } from "./email-label"
+import { EmailEditor } from "./email-editor"
 
 export const selectors = {
     root: "mr-emails-input",
 }
 
 export class EmailsInput extends Component {
-    name = "emails-input"
     label = new EmailLabel({
-        value: "mi sha@gmail.com",
-        onRemove: console.log,
+        value: "misha@gmail.com",
+        onRemove: console.log.bind(console),
     })
+
+    _editor = new EmailEditor({})
 
     onMount(): void {
         console.log(this)
+        this._editor.mount()
         this.label.mount()
     }
 
     onUnmount(): void {
         console.log(this)
+        this._editor.unmount()
     }
 
     view(): string {
@@ -37,6 +41,7 @@ export class EmailsInput extends Component {
                 ${this.label.view()}
                 ${this.label.view()}
                 ${this.label.view()}
+                ${this._editor.view()}
             </div>
         `
     }
@@ -56,7 +61,7 @@ css(`
         overflow-y: auto;
 
         background: ${colors.background};
-        border: 1px solid ${colors.textSeconday};
+        border: 1px solid ${colors.textSecondary};
         box-sizing: border-box;
         border-radius: 4px;
 
@@ -75,5 +80,11 @@ css(`
 
     .${selectors.root} > :not(:last-child) {
         margin-right: 8px;
+
+        flex: 0 0 auto;
+    }
+
+    .${selectors.root} > :last-child {
+        flex: 1 0 auto;
     }
 `)

@@ -10,13 +10,14 @@
     "unpkg": "dist/emails-input.umd.js",
     "scripts": {
         "build": "microbundle --name=mrEmailsInput --no-compress",
-        "start": "microbundle --name=mrEmailsInput --no-compress watch",
+        "start": "microbundle --name=mrEmailsInput --no-compress watch & http-server -c-1",
         "prepublish": "npm run build"
     },
     "author": "Mihail Tratsiuk",
     "license": "MIT",
     "devDependencies": {
         "@testing-library/dom": "^7.29.6",
+        "http-server": "^0.12.3",
         "microbundle": "^0.13.0"
     }
 }

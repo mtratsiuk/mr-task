@@ -1,8 +1,8 @@
 export type IComponent<T extends Element = Element> = {
-    name: string
     ref: IRef<T>
     render: (node: Element) => void
     mount: () => void
+    unmount: () => void
     remove: () => void
 }
 
@@ -13,7 +13,6 @@ export type IRef<T extends Element = Element> = {
 }
 
 export abstract class Component<T extends Element = Element> implements IComponent<T> {
-    abstract name: string
     abstract onMount(): void
     abstract onUnmount(): void
     abstract view(): string
@@ -24,7 +23,8 @@ export abstract class Component<T extends Element = Element> implements ICompone
         node.innerHTML = this.view()
             .split("\n")
             .map((x) => x.trim())
-            .join("")
+            .filter(Boolean)
+            .join(" ")
 
         this.mount()
     }
@@ -34,13 +34,17 @@ export abstract class Component<T extends Element = Element> implements ICompone
         this.onMount()
     }
 
-    remove(): void {
+    unmount(): void {
         this.onUnmount()
+    }
+
+    remove(): void {
+        this.unmount()
         this.ref.current?.parentElement?.removeChild(this.ref.current)
     }
 }
 
-const RefIdAttr = "data-mr-ref"
+const REF_ID_ATTR = "data-mr-ref"
 
 export class Ref<T extends Element> implements IRef<T> {
     id: string | null
@@ -54,7 +58,7 @@ export class Ref<T extends Element> implements IRef<T> {
     create(): string {
         this.id = getNextRefId()
 
-        return `${RefIdAttr}="${this.id}"`
+        return `${REF_ID_ATTR}="${this.id}"`
     }
 
     mount(): void {
@@ -62,7 +66,7 @@ export class Ref<T extends Element> implements IRef<T> {
             throw new Error("Cannot mount ref. Make sure to call ref.create() first")
         }
 
-        this.current = document.querySelector(`[${RefIdAttr}="${this.id}"]`)
+        this.current = document.querySelector(`[${REF_ID_ATTR}="${this.id}"]`)
     }
 }
 

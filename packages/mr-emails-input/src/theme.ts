@@ -1,7 +1,7 @@
 export const colors = {
     background: "#FFFFFF",
     textPrimary: "#050038",
-    textSeconday: "#C3C2CF",
+    textSecondary: "#C3C2CF",
     highlight: "rgba(102, 153, 255, 0.2)",
     error: "#D92929",
 }

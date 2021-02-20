@@ -15,8 +15,6 @@ export type EmailLabelProps = {
 }
 
 export class EmailLabel extends Component {
-    name = "email-label"
-
     _value: string
     _onRemove: (value: string) => void
     _buttonRemove?: HTMLButtonElement | null
@@ -50,7 +48,10 @@ export class EmailLabel extends Component {
 
     view(): string {
         return `
-            <div ${this.ref.create()} class="${selectors.root} ${this.isValid ? "" : selectors.invalid}">
+            <div
+                ${this.ref.create()}
+                class="${selectors.root} ${this.isValid ? "" : selectors.invalid}"
+            >
                 <div>${this.value}</div>
                 <button class="${selectors.remove}">
                   ${icons.remove}
@@ -87,5 +88,16 @@ css(`
 
         background: transparent;
         border: none;
+
+        cursor: pointer;
+    }
+
+    .${selectors.remove}:focus {
+        outline: 1px solid ${colors.textSecondary}
+    }
+
+    .${selectors.remove}:active,
+    .${selectors.remove}:hover {
+        outline: none;
     }
 `)
