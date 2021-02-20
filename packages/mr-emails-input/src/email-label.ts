@@ -3,7 +3,7 @@ import { css } from "./styles"
 import { colors, icons } from "./theme"
 import { isValidEmail, noop } from "./utils"
 
-const selectors = {
+export const selectors = {
     root: "mr-email-label",
     invalid: "mr-email-label--invalid",
     remove: "mr-email-label__remove",

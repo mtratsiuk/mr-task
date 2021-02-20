@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",

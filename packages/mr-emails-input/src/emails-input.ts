@@ -4,7 +4,7 @@ import { colors } from "./theme"
 
 import { EmailLabel } from "./email-label"
 
-const selectors = {
+export const selectors = {
     root: "mr-emails-input",
 }
 

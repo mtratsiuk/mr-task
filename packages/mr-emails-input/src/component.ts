@@ -1,4 +1,4 @@
-export type IComponent<T extends Element> = {
+export type IComponent<T extends Element = Element> = {
     name: string
     ref: IRef<T>
     render: (node: Element) => void
@@ -40,6 +40,8 @@ export abstract class Component<T extends Element = Element> implements ICompone
     }
 }
 
+const RefIdAttr = "data-mr-ref"
+
 export class Ref<T extends Element> implements IRef<T> {
     id: string | null
     current: T | null
@@ -50,8 +52,9 @@ export class Ref<T extends Element> implements IRef<T> {
     }
 
     create(): string {
-        this.id = `data-mr-ref-${getNextRefId()}`
-        return this.id
+        this.id = getNextRefId()
+
+        return `${RefIdAttr}="${this.id}"`
     }
 
     mount(): void {
@@ -59,7 +62,7 @@ export class Ref<T extends Element> implements IRef<T> {
             throw new Error("Cannot mount ref. Make sure to call ref.create() first")
         }
 
-        this.current = document.querySelector(`[${this.id}]`)
+        this.current = document.querySelector(`[${RefIdAttr}="${this.id}"]`)
     }
 }
 
@@ -68,5 +71,5 @@ let refId = (Math.random() * 100) >>> 0
 function getNextRefId(): string {
     refId += 1
 
-    return `${refId}-${(Math.random() * 1000) >>> 0}`
+    return `${refId}.${(Math.random() * 1000) >>> 0}`
 }
