@@ -18,7 +18,7 @@ export abstract class Component<T extends Element = Element> implements ICompone
     abstract onUnmount(): void
     abstract view(): string
 
-    ref: IRef<T> = new Ref(this)
+    ref: IRef<T> = new Ref()
 
     render(node: Element): void {
         node.innerHTML = this.view()
@@ -40,21 +40,17 @@ export abstract class Component<T extends Element = Element> implements ICompone
     }
 }
 
-let refId = 0
-
 export class Ref<T extends Element> implements IRef<T> {
-    component: IComponent<T>
     id: string | null
     current: T | null
 
-    constructor(component: IComponent<T>) {
-        this.component = component
+    constructor() {
         this.id = null
         this.current = null
     }
 
     create(): string {
-        this.id = `data-mr-ref-${this.component.name}-${refId++}`
+        this.id = `data-mr-ref-${getNextRefId()}`
         return this.id
     }
 
@@ -65,4 +61,12 @@ export class Ref<T extends Element> implements IRef<T> {
 
         this.current = document.querySelector(`[${this.id}]`)
     }
+}
+
+let refId = (Math.random() * 100) >>> 0
+
+function getNextRefId(): string {
+    refId += 1
+
+    return `${refId}-${(Math.random() * 1000) >>> 0}`
 }
