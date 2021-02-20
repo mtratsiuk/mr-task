@@ -9,15 +9,19 @@
     "module": "dist/emails-input.module.js",
     "unpkg": "dist/emails-input.umd.js",
     "scripts": {
-        "build": "microbundle --name=mrEmailsInput --no-compress",
-        "start": "microbundle --name=mrEmailsInput --no-compress watch & http-server -c-1",
-        "prepublish": "npm run build"
+        "build": "microbundle --name=mrEmailsInput",
+        "start": "microbundle --name=mrEmailsInput watch & http-server -c-1",
+        "prepublish": "npm run build",
+        "docs": "typedoc --excludePrivate --out temp-docs --plugin typedoc-plugin-markdown ./src/emails-input-api.ts && concat-md --decrease-title-levels temp-docs && rm -rf temp-docs"
     },
     "author": "Mihail Tratsiuk",
     "license": "MIT",
     "devDependencies": {
         "@testing-library/dom": "^7.29.6",
+        "concat-md": "^0.3.5",
         "http-server": "^0.12.3",
-        "microbundle": "^0.13.0"
+        "microbundle": "^0.13.0",
+        "typedoc": "^0.20.26",
+        "typedoc-plugin-markdown": "^3.5.0"
     }
 }

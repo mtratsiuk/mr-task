@@ -86,7 +86,6 @@ css(`
     .${selectors.remove} {
         display: block;
 
-        padding: 0;
         padding: 3px 3px 3px 8px;
 
         background: transparent;
