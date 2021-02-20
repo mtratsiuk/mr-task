@@ -12,7 +12,15 @@ export class EmailsInputApi {
         this._input.render(node)
     }
 
-    remove(): void {
+    add(email: string): void {
+        this._input.addEmail(email)
+    }
+
+    remove(email: string): void {
+        this._input.removeEmail(email)
+    }
+
+    destroy(): void {
         this._input.remove()
     }
 }

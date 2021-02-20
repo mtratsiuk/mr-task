@@ -11,12 +11,12 @@ export const selectors = {
 
 export type EmailLabelProps = {
     value: string
-    onRemove?: (value: string) => void
+    onRemove?: (label: EmailLabel) => void
 }
 
 export class EmailLabel extends Component {
-    _value: string
-    _onRemove: (value: string) => void
+    _value: EmailLabelProps["value"]
+    _onRemove: NonNullable<EmailLabelProps["onRemove"]>
     _buttonRemove?: HTMLButtonElement | null
 
     constructor({ value, onRemove = noop }: EmailLabelProps) {
@@ -43,7 +43,7 @@ export class EmailLabel extends Component {
     }
 
     _handleRemove = (): void => {
-        this._onRemove(this.value)
+        this._onRemove(this)
     }
 
     view(): string {
@@ -53,7 +53,10 @@ export class EmailLabel extends Component {
                 class="${selectors.root} ${this.isValid ? "" : selectors.invalid}"
             >
                 <div>${this.value}</div>
-                <button class="${selectors.remove}">
+                <button
+                    class="${selectors.remove}"
+                    aria-label="remove"
+                >
                   ${icons.remove}
                 </button>
             </div>
@@ -88,16 +91,12 @@ css(`
 
         background: transparent;
         border: none;
-
+        outline: none;
         cursor: pointer;
+        transition: transform 0.2s;
     }
 
     .${selectors.remove}:focus {
-        outline: 1px solid ${colors.textSecondary}
-    }
-
-    .${selectors.remove}:active,
-    .${selectors.remove}:hover {
-        outline: none;
+        transform: scale(1.3);
     }
 `)

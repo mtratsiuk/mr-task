@@ -9,38 +9,75 @@ export const selectors = {
     root: "mr-emails-input",
 }
 
-export class EmailsInput extends Component {
-    label = new EmailLabel({
-        value: "misha@gmail.com",
-        onRemove: console.log.bind(console),
-    })
+export class EmailsInput extends Component<HTMLDivElement> {
+    _handleEmailSubmit = (value: string): void => {
+        this.addEmail(value)
+    }
 
-    _editor = new EmailEditor({})
+    _handleEmailRemove = (value: EmailLabel): void => {
+        this._removeLabel(value)
+    }
+
+    _editor = new EmailEditor({ onSubmit: this._handleEmailSubmit })
+    _labels: EmailLabel[] = []
+
+    get value(): string[] {
+        return this._labels.map(({ value }) => value)
+    }
+
+    get state(): { value: string; isValid: boolean }[] {
+        return this._labels.map(({ value, isValid }) => ({ value, isValid }))
+    }
+
+    addEmail(email: string): void {
+        const renderTarget = this._editor.ref.current
+
+        if (!renderTarget) {
+            throw new Error("Cannot render `EmailLabel:` `EmailEditor` is not found")
+        }
+
+        const label = new EmailLabel({
+            value: email,
+            onRemove: this._handleEmailRemove,
+        })
+
+        label.render(renderTarget, "beforebegin")
+
+        this._labels.push(label)
+    }
+
+    removeEmail(email: string): void {
+        for (const label of this._labels) {
+            if (label.value === email) {
+                this._removeLabel(label)
+            }
+        }
+    }
 
     onMount(): void {
-        console.log(this)
         this._editor.mount()
-        this.label.mount()
     }
 
     onUnmount(): void {
-        console.log(this)
         this._editor.unmount()
+
+        for (const label of this._labels) {
+            label.unmount()
+        }
+    }
+
+    _removeLabel(labelToRemove: EmailLabel): void {
+        this._labels = this._labels.filter((label) => label !== labelToRemove)
+
+        labelToRemove.remove()
     }
 
     view(): string {
         return `
-            <div ${this.ref.create()} class="${selectors.root}">
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
-                ${this.label.view()}
+            <div
+                ${this.ref.create()}
+                class="${selectors.root}"
+            >
                 ${this._editor.view()}
             </div>
         `

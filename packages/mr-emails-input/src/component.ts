@@ -19,12 +19,14 @@ export abstract class Component<T extends Element = Element> implements ICompone
 
     ref: IRef<T> = new Ref()
 
-    render(node: Element): void {
-        node.innerHTML = this.view()
+    render(node: Element, mode: InsertPosition = "beforeend"): void {
+        const markup = this.view()
             .split("\n")
             .map((x) => x.trim())
             .filter(Boolean)
             .join(" ")
+
+        node.insertAdjacentHTML(mode, markup)
 
         this.mount()
     }
@@ -63,7 +65,7 @@ export class Ref<T extends Element> implements IRef<T> {
 
     mount(): void {
         if (!this.id) {
-            throw new Error("Cannot mount ref. Make sure to call ref.create() first")
+            throw new Error("Cannot mount ref. Make sure to call `ref.create()` first")
         }
 
         this.current = document.querySelector(`[${REF_ID_ATTR}="${this.id}"]`)

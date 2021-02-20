@@ -1,7 +1,7 @@
 import { Component } from "./component"
 import { css } from "./styles"
 import { colors } from "./theme"
-import { keyCodes, isKeyPressed, getPasteInput } from "./utils"
+import { keyCodes, isKeyPressed, getPasteInput, noop } from "./utils"
 
 export const PLACEHOLDER_TEXT = "add more people…"
 export const SUBMIT_ON_KEYS = [keyCodes.Enter]
@@ -12,12 +12,16 @@ export const selectors = {
     root: "mr-email-editor",
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type EmailEditorProps = {}
+export type EmailEditorProps = {
+    onSubmit?: (value: string) => void
+}
 
 export class EmailEditor extends Component<HTMLInputElement> {
-    constructor({}: EmailEditorProps) {
+    _onSubmit: (value: string) => void
+
+    constructor({ onSubmit = noop }: EmailEditorProps) {
         super()
+        this._onSubmit = onSubmit
     }
 
     get value(): string | undefined {
@@ -75,18 +79,18 @@ export class EmailEditor extends Component<HTMLInputElement> {
     }
 
     _submit(email: string | string[] | undefined): void {
-        if (!email) {
-            return
-        }
-
         if (this.ref.current) {
             this.ref.current.value = ""
         }
 
-        const emails = Array.isArray(email) ? email : [email]
+        if (!email) {
+            return
+        }
+
+        const emails = (Array.isArray(email) ? email : [email]).map((value) => value.trim()).filter(Boolean)
 
         for (const value of emails) {
-            console.log(value.trim())
+            this._onSubmit(value)
         }
     }
 
