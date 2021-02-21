@@ -1,4 +1,1 @@
-.snowpack
-build
-node_modules
-public/emails-input.umd.js
+./src/emails-input.umd.js

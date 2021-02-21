@@ -3,24 +3,16 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "prepare": "cp ./node_modules/@mr/emails-input/dist/emails-input.umd.js ./public/emails-input.umd.js",
-    "start": "snowpack dev",
-    "build": "snowpack build",
-    "test": "jest"
+    "build": "mkdir -p ./dist && npm run copy-lib && npm run styles && npm run scripts && npm run html",
+    "html": "cp ./src/index.html ./dist/index.html",
+    "scripts": "cp ./src/index.js ./dist/index.js",
+    "styles": "lessc ./src/index.less ./dist/index.css",
+    "copy-lib": "cp ./node_modules/@mr/emails-input/dist/emails-input.umd.js ./node_modules/@mr/emails-input/dist/emails-input.umd.js.map ./dist"
   },
   "dependencies": {
-    "@mr/emails-input": "^1.0.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "@mr/emails-input": "^1.0.0"
   },
   "devDependencies": {
-    "@snowpack/plugin-react-refresh": "^2.4.0",
-    "@snowpack/plugin-typescript": "^1.2.0",
-    "@testing-library/react": "^11.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/snowpack-env": "^2.3.2",
-    "snowpack": "^3.0.1",
-    "typescript": "^4.0.0"
+    "less": "^4.1.1"
   }
 }
