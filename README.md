@@ -1,8 +1,12 @@
 # mr-task
 
+[![Coverage Status](https://coveralls.io/repos/github/mtratsiuk/mr-task/badge.svg?branch=master)](https://coveralls.io/github/mtratsiuk/mr-task?branch=master)
+
 ## Live demo page
 
-> todo
+https://mtratsi.uk/mr-task/
+
+- [Deployed assets source code](https://github.com/mtratsiuk/mr-task/tree/gh-pages)
 
 ## Project Structure
 

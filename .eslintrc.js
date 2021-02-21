@@ -7,19 +7,9 @@ module.exports = {
             jsx: true,
         },
     },
-    settings: {
-        react: {
-            version: "detect",
-        },
-    },
-    extends: [
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended",
-    ],
+    settings: {},
+    extends: ["plugin:@typescript-eslint/recommended", "prettier/@typescript-eslint", "plugin:prettier/recommended"],
     rules: {
-        "react/prop-types": 0,
         "@typescript-eslint/no-non-null-assertion": 0,
     },
 }
