@@ -42,6 +42,6 @@ describe("EmailLabel", () => {
         await fireEvent.click(document.querySelector(`.${selectors.remove}`)!)
 
         expect(handleRemove).toHaveBeenCalledTimes(1)
-        expect(handleRemove).toHaveBeenCalledWith(email)
+        expect(handleRemove).toHaveBeenCalledWith(label)
     })
 })

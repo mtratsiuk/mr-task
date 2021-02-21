@@ -9,6 +9,7 @@ Zero-dependency reusable emails input component.
 - [Installation](Installation)
 - [Customization](Customization)
 - [API Reference](API-Reference)
+- [Development](Development)
 
 ## Installation
 
@@ -201,3 +202,15 @@ Name | Type | Description |
 **Returns:** *void*
 
 Defined in: [emails-input-api.ts:78](https://github.com/mtratsiuk/mr-task/blob/e5dea6b/packages/mr-emails-input/src/emails-input-api.ts#L78)
+
+## Development
+
+### Prerequisites
+
+- [Node & npm](https://nodejs.org/en/download/)
+
+### Launch development sandbox
+
+```
+npm start
+```
