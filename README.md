@@ -11,7 +11,7 @@ https://mtratsi.uk/mr-task/
 ## Project Structure
 
 - [mr-emails-input](./packages/mr-emails-input) - Zero-dependency reusable emails input component
-- [mr-demo-form](./packages/demo-form) - Static web page showcasing `@mr/emails-input` library usage
+- [mr-demo-form](./packages/mr-demo-form) - Static web page showcasing `@mr/emails-input` library usage
 
 ## Local Development
 
