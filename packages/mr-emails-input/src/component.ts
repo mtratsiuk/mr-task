@@ -19,6 +19,9 @@ export abstract class Component<T extends Element = Element> implements ICompone
 
     ref: IRef<T> = new Ref()
 
+    /**
+     * Note: untrusted input is NOT automatically sanitized
+     */
     render(node: Element, mode: InsertPosition = "beforeend"): void {
         const markup = this.view()
             .split("\n")

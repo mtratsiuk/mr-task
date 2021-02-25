@@ -19,3 +19,17 @@ export function getPasteInput(event: ClipboardEvent): string | undefined {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (event.clipboardData || (window as any)?.clipboardData)?.getData("text")
 }
+
+const htmlEscapes: Record<string, string> = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+}
+
+const htmlEscapesRegexp = /[&<>"']/g
+
+export function escape(value: string): string {
+    return value && value.replace(htmlEscapesRegexp, (char) => htmlEscapes[char])
+}

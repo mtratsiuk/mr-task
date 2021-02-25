@@ -1,7 +1,7 @@
 import { Component } from "./component"
 import { css } from "./styles"
 import { colors, icons } from "./theme"
-import { isValidEmail, noop } from "./utils"
+import { isValidEmail, noop, escape } from "./utils"
 
 export const selectors = {
     root: "mr-email-label",
@@ -52,7 +52,7 @@ export class EmailLabel extends Component {
                 ${this.ref.create()}
                 class="${selectors.root} ${this.isValid ? "" : selectors.invalid}"
             >
-                <div>${this.value}</div>
+                <div>${escape(this.value)}</div>
                 <button
                     class="${selectors.remove}"
                     aria-label="remove"
