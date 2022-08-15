@@ -4,7 +4,7 @@
 
 ## Live demo page
 
-https://mtratsi.uk/mr-task/
+https://misha.spris.dev/mr-task/
 
 - [Deployed assets source code](https://github.com/mtratsiuk/mr-task/tree/gh-pages)
 
